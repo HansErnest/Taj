@@ -3,108 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tajhanae 💘</title>
+<title>Words from My Heart 💖</title>
 <style>
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: #ffc3a0;
-  overflow: hidden;
-}
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: #ffe6ea;
+  }
 
-.card {
-  background: white;
-  padding: 5vw;
-  border-radius: 5vw;
-  box-shadow: 0 3vw 8vw rgba(0,0,0,0.25);
-  max-width: 90vw;
-  transition: opacity 0.5s ease;
-  z-index: 2;
-}
+  .letter {
+    background: #fff5e6;
+    padding: 8vw 6vw;
+    border-radius: 5vw;
+    max-width: 90vw;
+    text-align: center;
+    box-shadow: 0 2vw 5vw rgba(0,0,0,0.2);
+  }
 
-h1 { font-size: 8vw; color:#e60073; margin-bottom:3vw; }
-p { font-size:5vw; color:#555; margin-bottom:5vw; }
+  .letter h2 {
+    font-family: 'Verdana', sans-serif;
+    font-size: 6vw;
+    color: #e60000;
+    margin-bottom: 4vw;
+    letter-spacing: 0.2em;
+  }
 
-button {
-  padding:3vw 6vw;
-  font-size:5vw;
-  border:none;
-  border-radius:5vw;
-  cursor:pointer;
-  margin:2vw;
-}
+  .letter p {
+    font-family: 'Georgia', serif;
+    font-size: 4.5vw;
+    color: #333;
+    line-height: 1.6em;
+  }
 
-#yesBtn { background:#ff4d6d; color:white; }
-#noBtn { background:#ccc; }
-
-.polaroid {
-  position:absolute;
-  background:white;
-  padding:3vw;
-  border-radius:2vw;
-  box-shadow:0 3vw 8vw rgba(0,0,0,0.25);
-  cursor:pointer;
-  max-width:90vw;
-  opacity:0;
-  transition: opacity 0.5s ease;
-  z-index:5;
-}
-
-.polaroid img { width:100%; height:auto; border-radius:2vw; }
-.caption { font-size:5vw; color:#e60073; margin-top:2vw; }
-.message { font-size:6vw; color:#e60073; opacity:0; transition: opacity 0.5s ease; }
-
-#loveLetter {
-  position:fixed;
-  top:0; left:0; width:100%; height:100%;
-  background:#ffe6ea;
-  display:flex; justify-content:center; align-items:center;
-  opacity:0; pointer-events:none; transition: opacity 0.5s ease;
-  z-index:10;
-}
-
-#loveLetter.active { opacity:1; pointer-events:auto; }
-
-.letter {
-  background:#fff5e6;
-  padding:8vw 6vw;
-  border-radius:5vw;
-  max-width:90vw;
-  text-align:center;
-}
-
-.letter h2 {
-  font-family:'Verdana',sans-serif; font-size:6vw; color:#e60000;
-  margin-bottom:4vw; letter-spacing:0.2em;
-}
-
-.letter p { font-family:'Georgia',serif; font-size:4.5vw; color:#333; line-height:1.6em; }
+  @media(min-width:600px){
+    .letter h2 { font-size: 3em; }
+    .letter p { font-size: 1.3em; }
+  }
 </style>
 </head>
 <body>
-
-<!-- Valentine Card -->
-<div class="card" id="valentineCard">
-  <h1>Will you be my Valentine? 💕</h1>
-  <p>I have a question for you…</p>
-  <button id="yesBtn">Yes 💖</button>
-  <button id="noBtn">No 😢</button>
-</div>
-
-<!-- Polaroid -->
-<div class="polaroid" id="polaroidFull">
-  <div class="message" id="yesMessage">No was never an option 💖</div>
-  <img src="https://i.postimg.cc/BbSGWFhn/IMG-0979.jpg" alt="Tajhanae">
-  <div class="caption">Tajhanae 💕</div>
-</div>
-
-<!-- Love Letter -->
-<div id="loveLetter">
   <div class="letter">
     <h2>WORDS FROM MY HEART</h2>
     <p>
@@ -114,48 +56,5 @@ button {
       I love you so much
     </p>
   </div>
-</div>
-
-<script>
-const yesBtn = document.getElementById("yesBtn");
-const card = document.getElementById("valentineCard");
-const polaroid = document.getElementById("polaroidFull");
-const message = document.getElementById("yesMessage");
-const loveLetter = document.getElementById("loveLetter");
-const letter = loveLetter.querySelector(".letter");
-
-// Yes button click
-yesBtn.addEventListener("click", () => {
-  card.style.opacity = 0;
-  setTimeout(()=>{
-    card.style.display = "none";
-    polaroid.style.opacity = 1;
-  },500);
-
-  setTimeout(()=>{ message.style.opacity = 1; },700);
-
-  // Show love letter after 2.5s
-  setTimeout(()=>{
-    polaroid.style.opacity = 0;
-    setTimeout(()=>{
-      loveLetter.classList.add("active");
-    },700);
-  },2500);
-});
-
-// Double-tap to return
-let lastTap = 0;
-document.addEventListener("touchend", ()=>{
-  const currentTime = new Date().getTime();
-  const tapLength = currentTime - lastTap;
-  if(tapLength < 300 && tapLength > 0){
-    loveLetter.classList.remove("active");
-    polaroid.style.opacity = 0;
-    card.style.display = "block";
-    setTimeout(()=>{ card.style.opacity = 1; },50);
-  }
-  lastTap = currentTime;
-});
-</script>
 </body>
 </html>
